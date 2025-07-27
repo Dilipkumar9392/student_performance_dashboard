@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Result - GVPCE</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    .result-container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    h2 {
+      color: #004080;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #004080;
+      color: white;
+    }
+    .summary {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .error {
+      color: red;
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 20px;
+    }
+    .print-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .print-btn:hover {
+      background-color: #0066cc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="result-container">
+
+  {% if report %}
+    {{ report|safe }}
+  {% elif student %}
+    <h2>Academic Report - {{ student.Name }} ({{ student['Roll Number'] }})</h2>
+    <p class="summary">CGPA: {{ student.CGPA }} | Percentage: {{ student.Percentage }}% | Backlogs: {{ student.Backlogs }}</p>
+
+    {% for sem, sem_data in student.Semesters.items() %}
+      <h3>{{ sem }}</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Attendance Grade</th>
+            <th>Performance Grade</th>
+            <th>Credits</th>
+            <th>Grade Points</th>
+            <th>Credit Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for sub in sem_data.Subjects %}
+            <tr>
+              <td>{{ sub["Subject Code & Name"] }}</td>
+              <td>{{ sub["Attendance Grade"] }}</td>
+              <td>{{ sub["Performance Grade"] }}</td>
+              <td>{{ sub["Credits"] }}</td>
+              <td>{{ sub["Grade Point"] }}</td>
+              <td>{{ sub["Credit Points"] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="summary">SGPA: {{ sem_data.SGPA }} | Backlogs: {{ sem_data.Backlogs }}</p>
+    {% endfor %}
+
+    <button onclick="window.print()" class="print-btn">🖨️ Print Report</button>
+
+  {% else %}
+    <div class="error">❌ No data available or error occurred.</div>
+  {% endif %}
+
+</div>
+
+</body>
+</html>

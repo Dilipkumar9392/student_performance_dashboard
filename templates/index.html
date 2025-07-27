@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GVPCE Result Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  <div class="page-container">
+    <div class="background-blur"></div>
+    <div class="dark-overlay"></div>
+
+    <div class="content-wrapper">
+      <img src="https://i.postimg.cc/9MVDwRYS/GVPlogo.jpg" alt="GVP Logo" class="college-logo" />
+
+      <h1 class="college-name">GAYATRI VIDYA PARISHAD COLLEGE OF ENGINEERING (A)</h1>
+      <div class="autonomous"></div>
+      <p class="tagline1">(Accredited by NAAC at 'A++' Grade for 7 years in the 3rd Cycle)</p>
+      <p class="tagline-inputlike">DEPARTMENT OF ELECTRONICS AND COMMUNICATION ENGINEERING</p>
+      <p class="tagline">R-22 (2023-2026) Lateral Entries Academic Performance</p>
+
+      <!-- Form starts here -->
+      <form action="/result" method="POST" class="input-section">
+        <div class="input-inline">
+          <label for="rollNo">ENTER ROLL NO:</label>
+          <input type="text" id="rollNo" name="rollNo" placeholder="e.g., 323103312LXX" required>
+        </div>
+        <button class="view-btn" type="submit">View Result</button>
+      </form>
+      <!-- Form ends here -->
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span>Designed by <strong>Y. Dilip Kumar</strong></span>
+    <span> | </span>
+    <a href="mailto:botofficialverifier@gmail.com" class="contact-link"><strong>Contact</strong></a>
+  </footer>
+
+</body>
+</html>
